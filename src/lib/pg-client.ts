@@ -291,9 +291,11 @@ export default class PgClient {
   ): Promise<T | null> {
     const paramsSql = [];
     if (params) {
-      Object.keys(params).forEach((param) => {
-        paramsSql.push(`${param} => :${param}`);
-      });
+      Object.keys(params)
+        .filter((param) => params[param] !== undefined)
+        .forEach((param) => {
+          paramsSql.push(`${param} => :${param}`);
+        });
     }
     const sql = `SELECT * FROM "${functionName}"(${paramsSql.join(",")})`;
     const result = await this.queryOne<T>(sql, params, options);
