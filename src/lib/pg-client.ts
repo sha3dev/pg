@@ -288,7 +288,7 @@ export default class PgClient {
     functionName: string,
     params: Record<string, unknown> | null = null,
     options: QueryOptions = {}
-  ): Promise<T | null> {
+  ): Promise<T> {
     const paramsSql = [];
     if (params) {
       Object.keys(params)
