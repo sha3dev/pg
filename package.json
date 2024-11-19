@@ -1,6 +1,6 @@
 {
   "name": "@sha3/pg",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Postgres Wrapper",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

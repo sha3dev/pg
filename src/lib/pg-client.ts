@@ -13,7 +13,7 @@ import pg from "pg";
  * imports: internals
  */
 
-import PgError from "./pg-error";
+import PgException from "./pg-exception";
 
 /**
  * module: initializations
@@ -191,9 +191,9 @@ export default class PgClient {
           if (Array.isArray(params[key])) {
             sql = sql.replace(
               new RegExp(`:${key}`, "g"),
-              params[key]
+              `ARRAY[${params[key]
                 .map((item: any) => PgClient.encodeParameter(item, random))
-                .join(",")
+                .join(",")}]`
             );
           } else if (
             Object.prototype.toString.call(params[key]) === "[object Date]"
@@ -226,7 +226,7 @@ export default class PgClient {
       return result as T[];
     } catch (e: any) {
       err = e;
-      throw new PgError(e, sql);
+      throw new PgException(e, sql);
     } finally {
       const time = Date.now() - startedOn;
       if (err) {
