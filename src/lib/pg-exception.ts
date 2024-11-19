@@ -35,7 +35,7 @@ export default class PgException extends Error {
 
   public message: string;
 
-  public code?: number;
+  public status?: number;
 
   public cause?: unknown;
 
@@ -56,8 +56,8 @@ export default class PgException extends Error {
         if (json.message) {
           this.message = json.message;
         }
-        if (json.code) {
-          this.code = json.message;
+        if (json.status) {
+          this.status = json.status;
         }
         if (json.cause) {
           this.cause = json.cause;
