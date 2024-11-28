@@ -33,8 +33,6 @@ export default class PgException extends Error {
 
   public sql: string;
 
-  public message: string;
-
   public status?: number;
 
   public cause?: unknown;
